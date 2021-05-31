@@ -29,7 +29,6 @@ TBD
 
 ---
 
-
 ## Resources
 <!-- .slide: style="text-align: left;"> -->
 TBD
