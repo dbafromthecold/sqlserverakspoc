@@ -34,6 +34,15 @@ az aks get-credentials --resource-group kubernetes --name SQLK8sCluster2
 
 
 
+# test connection to clusters
+kubectl config use-context SQLK8sCluster1
+kubectl get nodes
+
+kubectl config use-context SQLK8sCluster2
+kubectl get nodes
+
+
+
 # stop clusters
 az aks stop --resource-group kubernetes --name SQLK8sCluster1
 az aks stop --resource-group kubernetes --name SQLK8sCluster2
