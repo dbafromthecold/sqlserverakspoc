@@ -1,0 +1,59 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sqlserver2019-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: sqlserver2019-pod
+  template:
+    metadata:
+      labels:
+        name: sqlserver2019-pod
+    spec:
+      containers:
+      - name: sqlserver2019
+        image: dev-nexus-01.channeladvisor.com:5000/sqlserver2019:cu3
+        ports:
+        - containerPort: 1433
+        livenessProbe:
+          tcpSocket:
+            port: 1433
+          initialDelaySeconds: 15
+          periodSeconds: 30
+        env:
+        - name: MSSQL_PID
+          value: "Developer"
+        - name: ACCEPT_EULA
+          value: "Y"
+        - name: MSSQL_AGENT_ENABLED
+          value: "Y"
+        - name: MSSQL_SA_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mssql-sa-secret
+              key: MSSQL_SA_PASSWORD
+        resources:
+          requests:
+            memory: "1024Mi"
+            cpu: "1000m"
+          limits:
+            memory: "2048Mi"
+            cpu: "2000m"
+      tolerations:
+      - key: "node.kubernetes.io/unreachable"
+        operator: "Exists"
+        effect: "NoExecute"
+        tolerationSeconds: 10
+      - key: "node.kubernetes.io/not-ready"
+        operator: "Exists"
+        effect: "NoExecute"
+        tolerationSeconds: 10
+      imagePullSecrets:
+      - name: channeladvisorrepo
+  strategy:
+    rollingUpdate:
+      maxSurge: 0
+      maxUnavailable: 1
+    type: RollingUpdate
