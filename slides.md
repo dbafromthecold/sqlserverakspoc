@@ -13,6 +13,13 @@
 
 ---
 
+## EightKB
+
+<p align="center">
+<img src="images/eightkb.png" />
+</p>
+
+
 ## Session Aim
 <!-- .slide: style="text-align: left;"> -->
 TBD
