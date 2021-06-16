@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: sqlserver
+  name: sqlserver
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sqlserver
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: sqlserver
+    spec:
+      securityContext:
+        fsGroup: 10001
+      containers:
+      - image: mcr.microsoft.com/mssql/server:2019-CU11-ubuntu-18.04
+        name: server
+        resources: {}
+        env:
+        - name: ACCEPT_EULA
+          value: "Y"
+        - name: MSSQL_SA_PASSWORD
+          value: "Testing1122"
+        volumeMounts:
+        - name: system
+          mountPath: /var/opt/mssql
+        - name: user
+          mountPath: /var/opt/sqlserver/data
+        - name: log
+          mountPath: /var/opt/sqlserver/log
+      tolerations:
+      - key: "node.kubernetes.io/unreachable"
+        operator: "Exists"
+        effect: "NoExecute"
+        tolerationSeconds: 10
+      - key: "node.kubernetes.io/not-ready"
+        operator: "Exists"
+        effect: "NoExecute"
+        tolerationSeconds: 10
+      volumes:
+      - name: system
+        persistentVolumeClaim:
+          claimName: mssql-system
+      - name: user
+        persistentVolumeClaim:
+          claimName: mssql-data
+      - name: log
+        persistentVolumeClaim:
+          claimName: mssql-log
+status: {}
