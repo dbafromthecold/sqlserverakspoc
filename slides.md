@@ -13,8 +13,6 @@
 
 ---
 
-## EightKB
-
 <p align="center">
 <img src="images/eightkb.png" />
 </p>
