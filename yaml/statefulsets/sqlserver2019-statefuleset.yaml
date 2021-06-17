@@ -1,0 +1,84 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: sqlserver2019-headless-svc
+spec:
+  ports:
+  - name: sqlserver2019-ports
+    port: 1433
+  clusterIP: None
+  selector:
+    name: sqlserver2019-pod
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: sqlserver2019-statefulset
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: sqlserver2019-pod # has to match .spec.template.metadata.labels
+  serviceName: "sqlserver2019-headless-svc"
+  replicas: 1 # by default is 1
+  template:
+    metadata:
+      labels:
+        name: sqlserver2019-pod # has to match .spec.selector.matchLabels
+    spec:
+      securityContext:
+        fsGroup: 10001
+      terminationGracePeriodSeconds: 10
+      containers:
+      - name: sqlserver2019
+        image: mcr.microsoft.com/mssql/server:2019-CU11-ubuntu-18.04
+        ports:
+        - containerPort: 1433
+        env:
+        - name: ACCEPT_EULA
+          value: "Y"
+        - name: MSSQL_SA_PASSWORD
+          value: "Testing1122"
+        resources:
+          requests:
+            memory: "1024Mi"
+            cpu: "1000m"
+          limits:
+            memory: "2048Mi"
+            cpu: "2000m"
+        volumeMounts:
+        - name: system
+          mountPath: /var/opt/mssql
+      tolerations:
+      - key: "node.kubernetes.io/unreachable"
+        operator: "Exists"
+        effect: "NoExecute"
+        tolerationSeconds: 10
+      - key: "node.kubernetes.io/not-ready"
+        operator: "Exists"
+        effect: "NoExecute"
+        tolerationSeconds: 10
+  updateStrategy:
+    type: RollingUpdate
+  volumeClaimTemplates:
+  - metadata:
+      name: system
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      storageClassName: "default" #px-mssql-sc - portworx storage class
+      resources:
+        requests:
+          storage: 1Gi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: sqlserver2019-svc
+spec:
+  ports:
+  - name: sqlserver2019-ports
+    port: 1433
+    targetPort: 1433
+  selector:
+    name: sqlserver2019-pod
+  type: LoadBalancer
