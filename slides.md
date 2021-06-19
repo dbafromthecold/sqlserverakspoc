@@ -69,6 +69,8 @@ To go through how we approached testing running SQL Server in Azure Kubernetes S
 <font size="6">
 <a href="https://github.com/dbafromthecold/sqlserverakspoc">https://github.com/dbafromthecold/sqlserverakspoc</a><br>
 <a href="http://tinyurl.com/y3x29t3j/summary-of-my-container-series">http://tinyurl.com/y3x29t3j/summary-of-my-container-series</a><br>
+<a href="https://portworx.com/">https://portworx.com"</a></br>
+<a href="https://docs.microsoft.com/en-us/azure/azure-arc/data/managed-instance-overview">https://docs.microsoft.com/en-us/azure/azure-arc/data/managed-instance-overview</a>
 </font>
 
 <p align="center">
