@@ -27,35 +27,44 @@ To go through how we approached testing running SQL Server in Azure Kubernetes S
 
 ## Running the Kubernetes cluster
 <!-- .slide: style="text-align: left;"> -->
-On-premises vs Cloud<br>
-Node size and configuration<br>
-On-going maintenance?<br>
-Skillset
+- On-premises vs Cloud<br>
+- Node size and configuration<br>
+- On-going maintenance?<br>
+- Skillset
 
 ---
 
 ## Deploying SQL Server
 <!-- .slide: style="text-align: left;"> -->
-Private registry vs MCR<br>
-Deployments vs Statefulsets<br>
-Helm Charts
+- Private registry vs MCR<br>
+- Deployments vs Statefulsets<br>
+- Helm Charts
 
 ---
 
 ## Other considerations
-Disaster Recovery<br>
-Performance<br>
-Security
+- Disaster Recovery<br>
+- Performance<br>
+- Security
 
 ---
 
 ## High availability
 <!-- .slide: style="text-align: left;"> -->
-Using the built-in Kubernetes features<br>
-SQL Server high availability features unavailable<br>
-Pod recovery<br>
-Node recovery
+- Using the built-in Kubernetes features<br>
+- SQL Server high availability features unavailable<br>
+- Pod recovery<br>
+- Node recovery
 
 ---
 
 # Demos
+
+---
+
+## Resources
+<!-- .slide: style="text-align: left;"> -->
+<font size="6">
+<a href="https://github.com/dbafromthecold/sqlserverakspoc">https://github.com/dbafromthecold/sqlserverakspoc</a><br>
+<a href="http://tinyurl.com/y3x29t3j/summary-of-my-container-series">http://tinyurl.com/y3x29t3j/summary-of-my-container-series</a><br>
+</font>
