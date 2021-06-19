@@ -43,6 +43,7 @@ To go through how we approached testing running SQL Server in Azure Kubernetes S
 ---
 
 ## Other considerations
+<!-- .slide: style="text-align: left;"> -->
 - Disaster Recovery<br>
 - Performance<br>
 - Security
