@@ -44,6 +44,7 @@ To go through how we approached testing running SQL Server in Azure Kubernetes S
 
 ## Other considerations
 <!-- .slide: style="text-align: left;"> -->
+- AKS cluser configuration - Node Pools & Availability Zones
 - Disaster Recovery<br>
 - Performance<br>
 - Security
