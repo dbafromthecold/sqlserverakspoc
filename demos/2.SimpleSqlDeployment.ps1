@@ -1,55 +1,73 @@
 
 
 
+# navigate to yaml files
 Set-Location C:\git\dbafromthecold\sqlserverakspoc\yaml
 
 
 
+# set context to cluster 1
 kubectl config use-context SQLK8sCluster1
 
 
 
+# test connection to cluster
 kubectl get nodes
 
 
 
+# generate yaml for sqlserver deployment
 kubectl create deployment sqlserver --image=mcr.microsoft.com/mssql/server:2019-CU11-ubuntu-18.04 --dry-run=client -o yaml
 
 
 
+# deploy sql server to cluster
 kubectl apply -f .\1.SimpleSqlDeployment.yaml
 
 
 
+# view deployment
 kubectl get deployment
 
 
 
+# view pods
 kubectl get pods
 
 
 
+# see pod events
 kubectl describe pods
 
 
 
+# get nodes that pod is deployed on
 kubectl get pods -o wide
 
 
+##
+## shut down node that pod is running on
+##
 
+
+
+# watch node until it becomes NotReady
 kubectl get nodes --watch
 
 
 
+# watch pod to see if it is moved to a new node
+# pod will be created on a new node in ~ 5mins (the default)
 kubectl get pods -o wide --watch
 
 
 
-# pod will be created on a new node in ~ 5mins (the default)
+# delete deployment
 kubectl delete deployment sqlserver
 
 
 
+# confirm pod is gone
 kubectl get pods
 
 
@@ -85,48 +103,67 @@ kubectl get pods
 
 
 
+# view updated yaml file
 Get-Content .\2.UpdatedSqlDeployment.yaml
 
 
 
-kubectl get pods
-
-
-
+# deploy updated yaml file
 kubectl apply -f .\2.UpdatedSqlDeployment.yaml
 
 
 
+# confirm deployment
 kubectl get deployments
 
 
 
+# view which node the pod is deployed on
 kubectl get pods -o wide
 
 
 
+##
+## shut down node that pod is running on
+##
+
+
+
+# watch node until it is NotReady
 kubectl get nodes --watch
 
 
 
+# watch pod to see if it is moved to a new node
 kubectl get pods -o wide --watch
 
 
 
+# confirm new pod
 kubectl get pods -o wide
 
 
 
+##
+## start node that pod was running on
+##
+
+
+
+# watch node until it is in a Ready state
 kubectl get nodes --watch
 
 
 
+# watch the pods
 kubectl get pods -o wide --watch
 
 
 
+# confirm pod
 kubectl get pods
 
 
 
+# delete the deployment
 kubectl delete deployment sqlserver
