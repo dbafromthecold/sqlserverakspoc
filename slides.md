@@ -21,17 +21,44 @@
 
 ## Session Aim
 <!-- .slide: style="text-align: left;"> -->
-TBD
+To go through how we approached testing running SQL Server in Azure Kubernetes Services
 
 ---
 
-## Agenda
+## Running the Kubernetes cluster
 <!-- .slide: style="text-align: left;"> -->
-TBD
+On-premises vs Cloud<br>
+Node size and configuration<br>
+On-going maintenance?<br>
+Skillset
 
 ---
 
-# Demo
+## Deploying SQL Server
+<!-- .slide: style="text-align: left;"> -->
+Private registry vs MCR<br>
+Deployments vs Statefulsets<br>
+Helm Charts
+
+---
+
+## Other considerations
+Disaster Recovery<br>
+Performance<br>
+Security
+
+---
+
+## High availability
+<!-- .slide: style="text-align: left;"> -->
+Using the built-in Kubernetes features<br>
+SQL Server high availability features unavailable<br>
+Pod recovery<br>
+Node recovery
+
+---
+
+# Demos
 
 ---
 
