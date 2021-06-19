@@ -12,6 +12,16 @@
 
 
 
+# Portworx website
+# https://portworx.com/
+
+
+
+# switch context to cluster 1
+kubectl config use-context SQLK8sCluster1
+
+
+
 # navigate to yaml files
 Set-Location C:\git\dbafromthecold\sqlserverakspoc\yaml
 
