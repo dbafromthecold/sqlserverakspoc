@@ -1,3 +1,14 @@
+############################################################################
+############################################################################
+#
+# SQL Server on AKS Proof of Concept - Andrew Pruski
+# @dbafromthecold
+# dbafromthecold@gmail.com
+# https://github.com/dbafromthecold/sqlserverakspoc
+# Creating the clusters for the demos
+#
+############################################################################
+############################################################################
 
 
 
