@@ -59,10 +59,3 @@ Node recovery
 ---
 
 # Demos
-
----
-
-## Resources
-<!-- .slide: style="text-align: left;"> -->
-TBD
-
