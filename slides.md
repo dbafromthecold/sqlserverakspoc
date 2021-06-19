@@ -69,3 +69,7 @@ To go through how we approached testing running SQL Server in Azure Kubernetes S
 <a href="https://github.com/dbafromthecold/sqlserverakspoc">https://github.com/dbafromthecold/sqlserverakspoc</a><br>
 <a href="http://tinyurl.com/y3x29t3j/summary-of-my-container-series">http://tinyurl.com/y3x29t3j/summary-of-my-container-series</a><br>
 </font>
+
+<p align="center">
+<img src="images/sqlserverakspoc_qrcode.png" />
+</p>
