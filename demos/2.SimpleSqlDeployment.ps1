@@ -67,6 +67,11 @@ kubectl get nodes --watch
 
 
 
+# confirm node is not ready
+kubectl get nodes
+
+
+
 # watch pod to see if it is moved to a new node
 # pod will be created on a new node in ~ 5mins (the default)
 kubectl get pods -o wide --watch
@@ -142,6 +147,11 @@ kubectl get pods -o wide
 
 # watch node until it is NotReady
 kubectl get nodes --watch
+
+
+
+# confirm node is NotReady
+kubectl get nodes
 
 
 

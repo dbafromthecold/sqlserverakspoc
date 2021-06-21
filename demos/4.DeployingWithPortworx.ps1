@@ -27,6 +27,11 @@ Set-Location C:\git\dbafromthecold\sqlserverakspoc\yaml
 
 
 
+# view portworx resources in kube-system namespace
+kubectl get all -n kube-system
+
+
+
 # view yaml to create portworx storage class
 Get-Content .\5.CreatePortworxStorageClass.yaml
 
@@ -125,5 +130,5 @@ kubectl get pods -o wide
 
 
 # clean up
-kubectl delete deployment sqlserverakspoc
+kubectl delete deployment sqlserver
 kubectl delete pvc mssql-data mssql-log mssql-system

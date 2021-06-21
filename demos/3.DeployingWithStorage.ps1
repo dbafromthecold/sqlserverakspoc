@@ -98,6 +98,11 @@ kubectl get nodes --watch
 
 
 
+# confirm node is NotReady
+kubectl get nodes
+
+
+
 # watch pod to see if it is moved to a new node
 kubectl get pods -o wide --watch
 
@@ -108,8 +113,12 @@ kubectl get pods
 
 
 
+# get pod name
+$Pod = $(kubectl get pods --no-headers -o custom-columns=":metadata.name")
+
+
 # get new pod events
-kubectl describe pod sqlserver-8577dc65fc-mkdp
+kubectl describe pod sqlserver-8577dc65fc-6g8n8
 
 
 
@@ -140,7 +149,7 @@ kubectl get pods
 
 
 # get pod events
-kubectl describe pods
+kubectl describe pod sqlserver-8577dc65fc-6g8n8
 
 
 
