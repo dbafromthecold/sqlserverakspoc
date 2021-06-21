@@ -96,13 +96,19 @@ kubectl get services -n arc
 
 
 
+# get service IP addresses
+$PrimaryIP = $(kubectl get service sql-01-external-svc -n arc --no-headers -o custom-columns=":status.loadBalancer.ingress[*].ip")
+$SecondaryIP = $(kubectl get service sql-01-secondary-external-svc -n arc --no-headers -o custom-columns=":status.loadBalancer.ingress[*].ip")
+
+
+
 # test connection to the primary instance
-mssql-cli -S 20.72.123.69 -U dbafromthecold -Q "SELECT @@SERVERNAME"
+mssql-cli -S $PrimaryIP -U dbafromthecold -P Testing1122 -Q "SELECT @@SERVERNAME AS [Server Name];"
 
 
 
 # test connection to the secondary instance
-mssql-cli -S 20.72.122.236 -U dbafromthecold -Q "SELECT @@SERVERNAME"
+mssql-cli -S $SecondaryIP -U dbafromthecold -P Testing1122 -Q "SELECT @@SERVERNAME AS [Server Name]"
 
 
 
@@ -111,56 +117,47 @@ kubectl get pods sql-01-0 sql-01-1 sql-01-2 -n arc -o wide
 
 
 
-##
-## shut down node the primary pod is running on
-##
+# get primary pod name
+$Pod = $(kubectl get pod sql-01-0 -n arc --no-headers -o custom-columns=":metadata.name")
 
 
 
-# watch node until it becomes NotReady
-kubectl get nodes --watch
+# copy backup to primary pod
+kubectl cp C:\git\dbafromthecold\sqlserverakspoc\backup\testdatabase.bak `
+$Pod`:var/opt/mssql/data/testdatabase.bak -c arc-sqlmi -n arc
 
 
 
-# view pods
-kubectl get pods sql-01-0 sql-01-1 sql-01-2 -n arc -o wide
+# confirm backup
+kubectl exec $Pod -c arc-sqlmi -n arc -- ls /var/opt/mssql/data
 
 
 
-##
-## start node the primary pod is running on
-##
+# restore database
+mssql-cli -S $PrimaryIP -U dbafromthecold -P Testing1122 -Q "RESTORE DATABASE [testdatabase] FROM DISK = '/var/opt/mssql/data/testdatabase.bak'"
 
 
 
-# watch node until it becomes Ready
-kubectl get nodes --watch
-
-
-
-# view pods
-kubectl get pods sql-01-0 sql-01-1 sql-01-2 -n arc -o wide
-
-
-
-# confirm node that primary is running on
-mssql-cli -S 20.72.123.69 -U dbafromthecold -Q "SELECT @@SERVERNAME"
+# confirm database
+mssql-cli -S $PrimaryIP -U dbafromthecold -P Testing1122 -Q "SELECT [name] FROM sys.databases;"
+mssql-cli -S $SecondaryIP -U dbafromthecold -P Testing1122 -Q "SELECT [name] FROM sys.databases;"
 
 
 
 # get availability group name
-mssql-cli -S 20.72.123.69 -U dbafromthecold -Q "SELECT [name] FROM sys.availability_groups"
+mssql-cli -S $PrimaryIP -U dbafromthecold -P Testing1122 -Q "SELECT [name] FROM sys.availability_groups"
 
 
 
 # attempt a manual failover
-mssql-cli -S 20.72.123.69 -U dbafromthecold -Q "ALTER AVAILABILITY GROUP [containedag] SET (ROLE = SECONDARY);"
-mssql-cli -S 20.72.122.236 -U dbafromthecold -Q "ALTER AVAILABILITY GROUP current SET (ROLE = PRIMARY);"
+#mssql-cli -S $PrimaryIP -d master -U dbafromthecold -P Testing1122 -Q "ALTER AVAILABILITY GROUP [sql-01] SET (ROLE = SECONDARY);"
+mssql-cli -S $SecondaryIP -d master -U dbafromthecold -P Testing1122 -Q "ALTER AVAILABILITY GROUP current SET (ROLE = PRIMARY);"
 
 
 
-# confirm connection to primary pod
-mssql-cli -S 20.72.123.69 -U dbafromthecold -Q "SELECT @@SERVERNAME"
+# confirm new primary & secondary
+mssql-cli -S $PrimaryIP -U dbafromthecold -P Testing1122 -Q "SELECT @@SERVERNAME AS [Server Name];"
+mssql-cli -S $SecondaryIP -U dbafromthecold -P Testing1122 -Q "SELECT @@SERVERNAME AS [Server Name];"
 
 
 
