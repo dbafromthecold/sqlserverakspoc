@@ -67,6 +67,7 @@ To go through how we approached testing running SQL Server in Azure Kubernetes S
 ## Resources
 <!-- .slide: style="text-align: left;"> -->
 <font size="6">
+<a href="https://eightkb.online/">https://eightkb.online/</a></br>
 <a href="https://github.com/dbafromthecold/sqlserverakspoc">https://github.com/dbafromthecold/sqlserverakspoc</a><br>
 <a href="https://portworx.com/">https://portworx.com</a></br>
 </font>
