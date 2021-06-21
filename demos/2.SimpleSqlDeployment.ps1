@@ -22,11 +22,6 @@ Set-Location C:\git\dbafromthecold\sqlserverakspoc\yaml
 
 
 
-# set context to cluster 1
-kubectl config use-context SQLK8sCluster1
-
-
-
 # test connection to cluster
 kubectl get nodes
 
