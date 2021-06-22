@@ -43,7 +43,7 @@ kubectl get deployment
 
 
 # view pods
-kubectl get pods -o wide --show-labels
+kubectl get pods -o wide
 
 
 

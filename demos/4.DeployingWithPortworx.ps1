@@ -41,13 +41,16 @@ kubectl create secret generic -n kube-system px-azure --from-literal=AZURE_TENAN
 
 
 
+# apply config generated from Portworx portal
+kubectl apply -f portworx_essentials.yaml
+
+
+
 # view portworx resources in kube-system namespace
 kubectl get all -n kube-system
 
 
 
-# apply config generated from Portworx portal
-kubectl apply -f portworx_essentials.yaml
 
 
 
