@@ -42,7 +42,7 @@ azdata arc dc create `
 --connectivity-mode Indirect `
 --name arc-dc-01 `
 --namespace arc `
---subscription fafcfdcb-d2a1-43a6-adbe-ca29842135a3 `
+--subscription xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx `
 --resource-group "kubernetes" `
 --location eastus2 `
 --storage-class default `
