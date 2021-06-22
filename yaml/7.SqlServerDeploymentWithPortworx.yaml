@@ -21,7 +21,7 @@ spec:
         fsGroup: 10001
       containers:
       - image: mcr.microsoft.com/mssql/server:2019-CU11-ubuntu-18.04
-        name: server
+        name: sqlserver
         resources: {}
         env:
         - name: ACCEPT_EULA

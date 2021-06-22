@@ -14,6 +14,7 @@
 
 # Portworx website
 # https://portworx.com/
+# https://portworx.com/how-to-run-ha-sql-server-on-azure-kubernetes-service/ 
 
 
 
@@ -27,8 +28,36 @@ Set-Location C:\git\dbafromthecold\sqlserverakspoc\yaml
 
 
 
+# create service principal
+az ad sp create-for-rbac --role="Contributor" --scopes="/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+
+
+
+# create secret for portworx to access Azure APIs
+kubectl create secret generic -n kube-system px-azure --from-literal=AZURE_TENANT_ID=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx `
+                                                      --from-literal=AZURE_CLIENT_ID=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx `
+                                                      --from-literal=AZURE_CLIENT_SECRET=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+
+
+
+
 # view portworx resources in kube-system namespace
 kubectl get all -n kube-system
+
+
+
+# apply config generated from Portworx portal
+kubectl apply -f portworx_essentials.yaml
+
+
+
+# view Portworx pods
+kubectl get pods -n=kube-system -l name=portworx -o wide
+
+
+
+# view daemonsets
+kubectl get ds -n kube-system
 
 
 
