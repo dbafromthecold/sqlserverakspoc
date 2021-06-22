@@ -43,7 +43,17 @@ kubectl get deployment
 
 
 # view pods
-kubectl get pods
+kubectl get pods -o wide --show-labels
+
+
+
+# delete pod
+kubectl delete pod $(kubectl get pods -l app=sqlserver --no-headers -o custom-columns=":metadata.name")
+
+
+
+# confirm new pod
+kubectl get pods -o wide
 
 
 
@@ -54,6 +64,7 @@ kubectl describe pods
 
 # get nodes that pod is deployed on
 kubectl get pods -o wide
+
 
 
 ##
