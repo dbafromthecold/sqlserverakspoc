@@ -150,7 +150,7 @@ mssql-cli -S $PrimaryIP -U dbafromthecold -P Testing1122 -Q "SELECT [name] FROM 
 
 
 # attempt a manual failover
-#mssql-cli -S $PrimaryIP -d master -U dbafromthecold -P Testing1122 -Q "ALTER AVAILABILITY GROUP [sql-01] SET (ROLE = SECONDARY);"
+mssql-cli -S $PrimaryIP -d master -U dbafromthecold -P Testing1122 -Q "ALTER AVAILABILITY GROUP current SET (ROLE = SECONDARY);"
 mssql-cli -S $SecondaryIP -d master -U dbafromthecold -P Testing1122 -Q "ALTER AVAILABILITY GROUP current SET (ROLE = PRIMARY);"
 
 
