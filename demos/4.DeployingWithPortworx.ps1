@@ -51,9 +51,6 @@ kubectl get all -n kube-system
 
 
 
-
-
-
 # view daemonsets
 kubectl get ds -n kube-system
 

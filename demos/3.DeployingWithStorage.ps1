@@ -113,12 +113,8 @@ kubectl get pods
 
 
 
-# get pod name
-$Pod = $(kubectl get pods --no-headers -o custom-columns=":metadata.name")
-
-
 # get new pod events
-kubectl describe pod sqlserver-59c78ddc9f-5t7fx
+kubectl describe pod PODNAME
 
 
 

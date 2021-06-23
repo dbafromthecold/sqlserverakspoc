@@ -133,7 +133,7 @@ kubectl exec $Pod -c arc-sqlmi -n arc -- ls /var/opt/mssql/data
 
 
 
-# restore database
+# restore database - issue with this - sql won't have access to the database backup file
 mssql-cli -S $PrimaryIP -U dbafromthecold -P Testing1122 -Q "RESTORE DATABASE [testdatabase] FROM DISK = '/var/opt/mssql/data/testdatabase.bak'"
 
 
