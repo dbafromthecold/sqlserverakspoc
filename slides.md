@@ -4,18 +4,12 @@
 
 ## Andrew Pruski
 
-### SQL Server DBA, Microsoft Data Platform MVP, & Certified Kubernetes Administrator
+### Field Solutions Architect, Microsoft Data Platform MVP, & Certified Kubernetes Administrator
 <!-- .slide: style="text-align: left;"> -->
 <i class="fab fa-twitter"></i><a href="https://twitter.com/dbafromthecold">  @dbafromthecold</a><br>
 <i class="fas fa-envelope"></i>  dbafromthecold@gmail.com<br>
 <i class="fab fa-wordpress"></i>  www.dbafromthecold.com<br>
 <i class="fab fa-github"></i><a href="https://github.com/dbafromthecold">  github.com/dbafromthecold</a>
-
----
-
-<p align="center">
-<img src="images/eightkb.png" />
-</p>
 
 ---
 
@@ -38,6 +32,7 @@ To go through how we approached testing running SQL Server in Azure Kubernetes S
 <!-- .slide: style="text-align: left;"> -->
 - Private registry vs MCR<br>
 - Deployments vs Statefulsets<br>
+- Limits and requests<br>
 - Helm Charts
 
 ---
@@ -67,7 +62,6 @@ To go through how we approached testing running SQL Server in Azure Kubernetes S
 ## Resources
 <!-- .slide: style="text-align: left;"> -->
 <font size="6">
-<a href="https://eightkb.online/">https://eightkb.online/</a></br>
 <a href="https://github.com/dbafromthecold/sqlserverakspoc">https://github.com/dbafromthecold/sqlserverakspoc</a><br>
 <a href="https://portworx.com/">https://portworx.com</a></br>
 </font>
